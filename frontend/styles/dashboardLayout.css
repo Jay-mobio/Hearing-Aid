@@ -1,0 +1,333 @@
+html body {
+  width: calc(100% - 8px) !important;
+}
+
+.sidebar {
+  /* flex: 0 0 235px !important; */
+  /* width: 235px !important; */
+  max-width: 235px !important;
+  background-color: white !important;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar .ant-menu {
+  order: 1;
+}
+
+.sidebar .bottom-nav {
+  order: 2;
+}
+
+.demo-logo-vertical {
+  height: 64px;
+  background: white;
+  /* border: 1px solid red; */
+  display: flex; /* Use flexbox to center the image vertically and horizontally */
+  align-items: center;
+  justify-content: center;
+}
+
+.integrated-logo {
+  max-width: 80%; /* Allow the image to scale down if needed */
+  max-height: 70%; /* Allow the image to scale down if needed */
+  /* border: 1px solid blue; */
+}
+
+.collapsed {
+  flex: 0 0 80px !important;
+}
+
+.expanded {
+  flex: 0 0 235px !important;
+}
+
+.right-side-content {
+  display: flex;
+  flex-direction: row;
+  /* padding-right: 20px; */
+  flex-wrap: wrap;
+  /* align-items: center; */
+  justify-content: flex-end;
+}
+
+.header-components {
+  font-size: 20px;
+  margin: 0px 10px;
+}
+
+.dropdown-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown {
+  line-height: 33px;
+  width: 20%;
+  cursor: pointer;
+}
+
+.background-button-color {
+  background-color: #08453d;
+}
+
+.text-gray {
+  color: #667085;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-menu-light .ant-menu-item-selected {
+  background-color: #08453d;
+  color: white;
+}
+
+.breadcum-title {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: 0.005em;
+  text-align: left;
+}
+
+.container-breadcrum {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-button {
+  background-color: #08453d;
+  color: white;
+}
+
+.drawer-header {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0.005em;
+  text-align: left;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-drawer .ant-drawer-body {
+  padding: 0px 24px;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-steps.ant-steps-navigation .ant-steps-item {
+  text-align: start;
+  margin-left: 15px;
+}
+
+/* :where(.css-dev-only-do-not-override-nnuwmp).ant-steps
+    .ant-steps-item-process
+    .ant-steps-item-icon {
+    background-color: #1677ff00;
+    border-color: #1677ff00;
+  } */
+:where(.css-dev-only-do-not-override-nnuwmp).ant-segmented .ant-segmented-item-selected {
+  background-color: #e0fffb;
+  color: #08453d;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-segmented .ant-segmented-group {
+  background: white;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-steps .ant-steps-item-process .ant-steps-item-icon {
+  background-color: #08453d;
+  color: white;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-steps .ant-steps-item-process .ant-steps-item-icon {
+  border-color: #08453d;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-steps.ant-steps-navigation .ant-steps-item::before {
+  background-color: #08453d;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #08453d;
+  color: white;
+  border-color: #08453d;
+}
+
+:where(.css-dev-only-do-not-override-nnuwmp).ant-steps .ant-steps-item-finish .ant-steps-item-icon>.ant-steps-icon {
+  color: white;
+}
+
+.add-milestone {
+  background: #80ca7b26;
+  color: #08453d;
+  /* width: 40% !important; */
+}
+
+.search-filter {
+  padding: 24px 0px 16px 0px;
+}
+
+.input-container {
+  padding: 10px 0px;
+}
+
+.list-container {
+  height: 350;
+  overflow: auto;
+  padding: 0 16px;
+  border: 1px solid rgba(140, 140, 140, 0.35);
+}
+
+.sidebar-icon {
+  height: 20px;
+}
+
+.drawer-footer-button {
+  width: 100px;
+  margin: 0px 10px;
+}
+
+.date-picker {
+  width: 100%;
+}
+
+.content-layout {
+  padding: 24px;
+  min-height: 88vh;
+  background: #f5f5f5;
+}
+
+.map-container {
+  height: 400px;
+}
+
+.sidebar {
+  background-color: rgba(35, 55, 75, 0.9);
+  /* padding: 6px 12px; */
+  font-family: monospace;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.icon-custom-hero {
+  width: 25%;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.image-center {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+.w-180 {
+  width: 180px;
+}
+
+/* here development overwrite css */
+:where(.css-nnuwmp).ant-steps.ant-steps-navigation .ant-steps-item-container {
+  display: flex !important;
+  margin-inline-start: 2px !important;
+  padding-bottom: 12px !important;
+  text-align: start !important;
+  transition: opacity 0.3s !important;
+}
+
+:where(.css-nnuwmp).ant-steps.ant-steps-navigation .ant-steps-item:before {
+  /* position: absolute!important; */
+  /* bottom: 0!important; */
+  /* inset-inline-start: 50%!important; */
+  /* display: inline-block!important; */
+  /* width: 0!important; */
+  /* height: 2px!important; */
+  background-color: #08453d !important;
+  transition: width 0.3s, inset-inline-start 0.3s !important;
+  transition-timing-function: ease-out !important;
+  content: '' !important;
+}
+
+:where(.css-nnuwmp).ant-steps .ant-steps-item-process .ant-steps-item-icon {
+  background-color: #08453d !important;
+  border-color: #08453d !important;
+}
+
+:where(.css-nnuwmp).ant-steps.ant-steps-navigation .ant-steps-item:before {
+  background-color: #08453d !important;
+  transition: width 0.3s, inset-inline-start 0.3s !important;
+  transition-timing-function: ease-out !important;
+  content: '' !important;
+}
+
+:where(.css-nnuwmp).ant-btn-default:not(:disabled):not(.ant-btn-disabled):active {
+  color: white !important;
+  border-color: white !important;
+}
+
+:where(.css-nnuwmp).ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #08453d;
+  border-color: #08453d;
+}
+
+.delete-button {
+  border: dotted 2px #f00;
+}
+
+.btn-white {
+  background-color: white;
+  color: gray;
+}
+
+.width-30 {
+  width: 30%;
+}
+
+.h-btn {
+  height: 42px;
+}
+
+.upload-img {
+  width: 100px;
+  border-radius: 5px;
+  height: 100px;
+}
+
+.teammember-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.teammember-list-name {
+  padding-left: 10px;
+  align-self: center;
+}
+
+.mr-14 {
+  margin-right: 14px;
+}
+
+.anticon-exclamation-circle {
+  visibility: hidden;
+}
+
+.modal-style {
+  position: relative;
+  min-height: calc(100vh - 200px);
+}
+
+.spinner-style {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.text-right {
+  text-align: right;
+}

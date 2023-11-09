@@ -1,0 +1,25 @@
+.clickable {
+    cursor: pointer;
+}
+
+.assign {
+    width: 100%;
+}
+
+.pag {
+    width: 100%;
+}
+
+.table-action-btn-container {
+    display: flex;
+    align-items: center;
+}
+
+.custom-table-delete-icon {
+    cursor: pointer;
+}
+
+.icon-customization-for-qhse-card {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
