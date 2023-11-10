@@ -7,30 +7,10 @@ import { useState } from 'react';
 const { TextArea } = Input;
 const { Text } = Typography;
 
-export const Step4 = ({ gotoStep, current }) => {
-    const [isOtherSelected, setOtherSelected] = useState(false);
+export const Step4 = ({ gotoStep, current, form }) => {
     const [otherValue, setOtherValue] = useState('');
-    const [checkedValues, setCheckedValues] = useState([]);
-    const [cochlearImplantValues, setCochlearImplantValues] = useState([]);
     const [otherCochlearImplant, setOtherCochlearImplant] = useState('');
 
-    const handleCochlearImplantChange = (values) => {
-        setCochlearImplantValues(values);
-
-        // If "Others" is selected, reset the input value
-        if (!values.includes('Others')) {
-            setOtherCochlearImplant('');
-        }
-    };
-
-    const handleCheckboxChange = (values) => {
-        setCheckedValues(values);
-    };
-
-    const handleRadioChange = (e) => {
-        const value = e.target.value;
-        setOtherSelected(value === 'other');
-    };
     return (
         <>
             <Form.Item>
@@ -45,11 +25,11 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input child's hearing loss details",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <TextArea rows={4} placeholder="Child's Hearing Loss Details" maxLength={6} />
+                <TextArea rows={4} placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -58,7 +38,7 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input your answer",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -71,11 +51,11 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input child's degree and type of hearing loss",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Radio.Group onChange={handleRadioChange} value={isOtherSelected ? otherValue : undefined}>
+                <Radio.Group>
                     <Space direction="vertical">
                         <Radio value="Bilateral Sensory Neural Profound Hearing Loss">Bilateral Sensory Neural Profound Hearing Loss/बायलेट्ल  सेंसरी न्यूरल प्रोफाउंड हियरिंग लॉस</Radio>
                         <Radio value="Bilateral Sensory Neural Severe to Profound Hearing Loss">Bilateral Sensory Neural Severe to Profound Hearing Loss/बायलेट्ल  सेंसरी न्यूरल सीवियर टू प्रोफाउंड हियरिंग लॉस</Radio>
@@ -83,18 +63,23 @@ export const Step4 = ({ gotoStep, current }) => {
                         <Radio value="Bilateral Sensory Neural Moderate to Severe Hearing Loss">Bilateral Sensory Neural Moderate to Severe Hearing Loss/बायलेट्ल  सेंसरी न्यूरल मॉडरेट टू सीवियर हियरिंग लॉस</Radio>
                         <Radio value="Bilateral Sensory Neural Moderate Hearing Loss">Bilateral Sensory Neural Moderate Hearing Loss/बायलेट्ल  सेंसरी न्यूरल मॉडरेट हियरिंग लॉस</Radio>
                         <Radio value="Bilateral Sensory Neural Mild to Moderate Hearing Loss">Bilateral Sensory Neural Mild to Moderate Hearing Loss/बायलेट्ल  सेंसरी न्यूरल माइल्ड टू मॉडरेट हियरिंग लॉस</Radio>
-                        <Radio value="other">
+                        <Radio value={otherValue}>
                             Other:
-                            {isOtherSelected && (
-                                <Input
-                                    style={{
-                                        width: 100,
-                                        marginLeft: 10,
-                                    }}
-                                    value={otherValue}
-                                    onChange={(e) => setOtherValue(e.target.value)}
-                                />
-                            )}
+                            <Input
+                                style={{
+                                    width: 200,
+                                    marginLeft: 10,
+                                }}
+                                placeholder='Your answer'
+                                value={otherValue}
+                                onChange={(e) => {
+                                    setOtherValue(e.target.value)
+                                    form.setFieldsValue({
+                                        "childHearingLossType": e.target.value,
+                                    });
+                                }
+                                }
+                            />
                         </Radio>
                     </Space>
                 </Radio.Group>
@@ -106,11 +91,11 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please select at least one option",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Checkbox.Group onChange={handleCheckboxChange} value={checkedValues}>
+                <Checkbox.Group >
                     <div className='checkbox'>
                         <Checkbox value="Cochlear Implant Right Ear">Cochlear Implant Right Ear</Checkbox>
                     </div>
@@ -135,11 +120,11 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please select at least one option",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Checkbox.Group onChange={handleCochlearImplantChange} value={cochlearImplantValues}>
+                <Checkbox.Group>
                     <div className='checkbox'>
                         <Checkbox value="Cochlear Company">Cochlear Company</Checkbox>
                     </div>
@@ -153,17 +138,23 @@ export const Step4 = ({ gotoStep, current }) => {
                         <Checkbox value="Digisonic">Digisonic</Checkbox>
                     </div>
                     <div className='checkbox'>
-                        <Checkbox value="Others">Others:</Checkbox>
-                        {cochlearImplantValues.includes('Others') && (
-                            <Input
-                                style={{
-                                    width: 100,
-                                    marginLeft: 10,
-                                }}
-                                value={otherCochlearImplant}
-                                onChange={(e) => setOtherCochlearImplant(e.target.value)}
-                            />
-                        )}
+                        <Checkbox value={otherCochlearImplant}>Others:</Checkbox>
+                        <Input
+                            style={{
+                                width: 200,
+                                marginLeft: 10,
+                            }}
+                            placeholder='Your answer'
+                            value={otherCochlearImplant}
+                            onChange={(e) => {
+                                setOtherCochlearImplant(e.target.value);
+                                form.setFieldsValue({
+                                    cochlearImplant: form.getFieldValue("cochlearImplant").includes(otherCochlearImplant) ?
+                                        [...form.getFieldValue("cochlearImplant").filter(val => val !== otherCochlearImplant), e.target.value] :
+                                        [...form.getFieldValue("cochlearImplant"), e.target.value],
+                                });
+                            }}
+                        />
                     </div>
                 </Checkbox.Group>
             </Form.Item>
@@ -174,7 +165,7 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Cochlear Implant Name or Number",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -187,13 +178,11 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Switch on date",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <DatePicker placeholder='Select date'
-                // onChange={onFillingDateChange}
-                />
+                <DatePicker className='date-field' placeholder='Select date' />
             </Form.Item>
 
             <Form.Item
@@ -202,13 +191,11 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Switch on date",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <DatePicker placeholder='Select date'
-                // onChange={onFillingDateChange}
-                />
+                <DatePicker className='date-field' placeholder='Select date' />
             </Form.Item>
 
             <Form.Item
@@ -217,7 +204,7 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Hearing Aid name & model number",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -230,13 +217,11 @@ export const Step4 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Hearing Aid Date",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <DatePicker placeholder='Select date'
-                // onChange={onFillingDateChange} 
-                />
+                <DatePicker className='date-field' placeholder='Select date' />
             </Form.Item>
 
             <Form.Item>

@@ -1,21 +1,16 @@
 "use client"
 import { Form, Input, DatePicker, Radio, Space, Button } from 'antd';
-import { onFillingDateChange, tailLayout2 } from './assessmentFormUtils';
 import './assessmentForm.css';
 import Image from 'next/image';
 import Logo from "../../icon/Integrated-logo.png";
 import { useState } from 'react';
+import { isEmailValid, isPhoneNumberValid } from '@/lib/utils';
 
 const { TextArea } = Input;
 
-export const Step2 = ({ gotoStep, current }) => {
-    const [isOtherSelected, setOtherSelected] = useState(false);
+export const Step2 = ({ gotoStep, current, form }) => {
     const [otherValue, setOtherValue] = useState('');
 
-    const handleRadioChange = (e) => {
-        const value = e.target.value;
-        setOtherSelected(value === 'other');
-    };
     return (
         <>
             <Form.Item>
@@ -31,11 +26,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Child's Full Name",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="Child's Full Name" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -44,13 +39,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Child's Date of Birth",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <DatePicker placeholder='DOB'
-                // onChange={onFillingDateChange}
-                />
+                <DatePicker className='date-field' placeholder='Select date' />
             </Form.Item>
 
             <Form.Item
@@ -59,27 +52,32 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Child's Gender",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Radio.Group onChange={handleRadioChange} value={isOtherSelected ? otherValue : undefined}>
+                <Radio.Group >
                     <Space direction="vertical">
                         <Radio value="female">Female/स्त्री</Radio>
                         <Radio value="male">Male/पुरुष</Radio>
                         <Radio value="Prefer not to say">Prefer not to say/चुप रहना पसंद करूंगा</Radio>
-                        <Radio value="other">
+                        <Radio value={otherValue}>
                             Other:
-                            {isOtherSelected && (
-                                <Input
-                                    style={{
-                                        width: 100,
-                                        marginLeft: 10,
-                                    }}
-                                    value={otherValue}
-                                    onChange={(e) => setOtherValue(e.target.value)}
-                                />
-                            )}
+                            <Input
+                                style={{
+                                    width: 200,
+                                    marginLeft: 10,
+                                }}
+                                placeholder='Your answer'
+                                value={otherValue}
+                                onChange={(e) => {
+                                    setOtherValue(e.target.value);
+                                    form.setFieldsValue({
+                                        "childGender": e.target.value,
+                                    });
+                                }
+                                }
+                            />
                         </Radio>
                     </Space>
                 </Radio.Group>
@@ -91,11 +89,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Caregiver's Full Name",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="Caregiver's Full Name" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -104,11 +102,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Mother's Name",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="Mother's Name" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -117,11 +115,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Father's Name",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="Father's Name" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -130,11 +128,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Full Address",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <TextArea rows={4} placeholder="Full Address" maxLength={6} />
+                <TextArea rows={4} placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -143,11 +141,19 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Mother's Cell No",
+                        message: 'This is a required question',
                     },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || isPhoneNumberValid(value)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject('Invalid phone number format');
+                        },
+                    }),
                 ]}
             >
-                <Input placeholder="Mother's Cell No" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -156,11 +162,19 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Father's Cell No",
+                        message: 'This is a required question',
                     },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || isPhoneNumberValid(value)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject('Invalid phone number format');
+                        },
+                    }),
                 ]}
             >
-                <Input placeholder="Father's Cell No" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -169,11 +183,19 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Mother's Email",
+                        message: 'This is a required question',
                     },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || isEmailValid(value)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject('Invalid email format');
+                        },
+                    }),
                 ]}
             >
-                <Input placeholder="Mother's Email" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -182,11 +204,19 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Father's Email",
+                        message: 'This is a required question',
                     },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || isEmailValid(value)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject('Invalid email format');
+                        },
+                    }),
                 ]}
             >
-                <Input placeholder="Father's Email" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -195,11 +225,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Mother's Occupation",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="Mother's Occupation" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -208,11 +238,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Father's Occupation",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="Father's Occupation" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -221,7 +251,7 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please select answer",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -239,7 +269,7 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your answer",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -252,7 +282,7 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Referred by",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -265,11 +295,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input ENT Name & Contact No",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="ENT Name & Contact No" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -278,11 +308,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Audiologist Name & Contact No",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="Audiologist Name & Contact No" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -291,11 +321,11 @@ export const Step2 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Language Spoken at Home",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Input placeholder="Language Spoken at Home" />
+                <Input placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item>

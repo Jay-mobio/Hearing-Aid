@@ -15,7 +15,7 @@ export const Step6 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: true,
-                    message: "Please input Birth weight of the child",
+                    message: "This is a required question",
                 },
             ]}
         >
@@ -28,11 +28,11 @@ export const Step6 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: true,
-                    message: "Please input Child's Health Details",
+                    message: "This is a required question",
                 },
             ]}
         >
-            <TextArea rows={4} placeholder="Your answer" maxLength={6} />
+            <TextArea rows={4} placeholder="Your answer" />
         </Form.Item>
 
         <Form.Item
@@ -41,7 +41,7 @@ export const Step6 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: true,
-                    message: "Please input your details",
+                    message: "This is a required question",
                 },
             ]}
         >
@@ -60,7 +60,7 @@ export const Step6 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: true,
-                    message: "Please input your details",
+                    message: "This is a required question",
                 },
             ]}
         >
@@ -78,7 +78,7 @@ export const Step6 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: true,
-                    message: "Please input Birth weight of the child",
+                    message: "This is a required question",
                 },
             ]}
         >
@@ -96,7 +96,7 @@ export const Step6 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: true,
-                    message: "Please input your details",
+                    message: "This is a required question",
                 },
             ]}
         >
@@ -109,11 +109,11 @@ export const Step6 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: false,
-                    message: "Please input your details",
+                    message: "This is a required question",
                 },
             ]}
         >
-            <TextArea rows={4} placeholder="Your answer" maxLength={6} />
+            <TextArea rows={4} placeholder="Your answer" />
         </Form.Item>
 
         <Form.Item>

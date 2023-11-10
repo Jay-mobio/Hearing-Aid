@@ -36,10 +36,10 @@ const StepperForm = (props) => {
     });
     const formList = [
         <Step1 gotoStep={gotoStep} current={current} />,
-        <Step2 gotoStep={gotoStep} current={current} />,
+        <Step2 gotoStep={gotoStep} current={current} form={form} />,
         <Step3 gotoStep={gotoStep} current={current} />,
-        <Step4 gotoStep={gotoStep} current={current} />,
-        <Step5 gotoStep={gotoStep} current={current} />,
+        <Step4 gotoStep={gotoStep} current={current} form={form} />,
+        <Step5 gotoStep={gotoStep} current={current} form={form} />,
         <Step6 gotoStep={gotoStep} current={current} />,
         <Step7 gotoStep={gotoStep} current={current} />,
         <Step8 gotoStep={gotoStep} current={current} formLoading={formLoading} submit={submit} />
