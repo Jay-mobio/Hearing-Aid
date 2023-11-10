@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes.assessment_crud import router as assement_router
+from routes.assessment import router as assement_router
+from routes.therapist import router as therapist_router
 
 
 app = FastAPI()
@@ -18,3 +19,4 @@ async def home():
     return {"Welcome to hearing aid"}
 
 app.include_router(assement_router, prefix="/assessment", tags=["assessment"])
+app.include_router(therapist_router, prefix="/therapist", tags=["therapist"])

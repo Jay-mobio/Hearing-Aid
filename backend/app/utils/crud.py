@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from bson import ObjectId
 
 def find_all(collection):
@@ -52,6 +53,26 @@ def create(collection, model):
         print(f"Error: {e}")
         return e
 
+def check_existence(collection, object_id):
+    """
+    Check if a document with the given ObjectId exists in the collection.
+
+    Args:
+        collection: The MongoDB collection.
+        object_id: The ObjectId to check for existence.
+
+    Returns:
+        dict: The existing document with ObjectId converted to string.
+    """
+    existing_obj = collection.find_one({"_id": object_id})
+    if not existing_obj:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+    # Convert ObjectId to string in the existing document
+    existing_obj["_id"] = str(existing_obj["_id"])
+
+    return existing_obj
+
 def find_one(collection, id):
     """
     Retrieve a single document from the given collection based on its ObjectId.
@@ -67,13 +88,74 @@ def find_one(collection, id):
         # Convert the provided string to ObjectId
         object_id = ObjectId(id)
 
-        # Find the document with the given ObjectId
-        obj = collection.find_one({"_id": object_id})
+        # Check if the document with the given ObjectId exists
+        existing_obj = check_existence(collection, object_id)
 
-        # Convert ObjectId to string in the retrieved document
-        obj["_id"] = str(obj["_id"])
+        return existing_obj
+    except Exception as e:
+        # Handle the exception, e.g., log it or return an error response
+        print(f"Error: {e}")
+        return e
 
-        return obj
+def update(collection, id, updated_data):
+    """
+    Update a document in the given collection based on its ObjectId.
+
+    Args:
+        collection: The MongoDB collection.
+        id (str): The string representation of the ObjectId.
+        updated_data: The data model with the updated information.
+
+    Returns:
+        dict: The updated document with ObjectId converted to string.
+    """
+    try:
+        # Convert the provided string to ObjectId
+        object_id = ObjectId(id)
+
+        # Check if the document with the given ObjectId exists
+        check_existence(collection, object_id)
+
+        # Update the document with the provided data
+        collection.update_one({"_id": object_id}, {"$set": updated_data.dict()}, upsert=False)
+
+        # Find and return the updated document
+        updated_obj = collection.find_one({"_id": object_id})
+
+        # Convert ObjectId to string in the updated document
+        updated_obj["_id"] = str(updated_obj["_id"])
+
+        return updated_obj
+    except Exception as e:
+        # Handle the exception, e.g., log it or return an error response
+        print(f"Error: {e}")
+        return e
+
+def delete(collection, id):
+    """
+    Delete a document from the given collection based on its ObjectId.
+
+    Args:
+        collection: The MongoDB collection.
+        id (str): The string representation of the ObjectId.
+
+    Returns:
+        dict: The deleted document with ObjectId converted to string.
+    """
+    try:
+        # Convert the provided string to ObjectId
+        object_id = ObjectId(id)
+
+        # Check if the document with the given ObjectId exists before deletion
+        existing_obj = check_existence(collection, object_id)
+
+        # Delete the document from the collection
+        collection.delete_one({"_id": object_id})
+
+        # Convert ObjectId to string in the deleted document
+        existing_obj["_id"] = str(existing_obj["_id"])
+
+        return existing_obj
     except Exception as e:
         # Handle the exception, e.g., log it or return an error response
         print(f"Error: {e}")

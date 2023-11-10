@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Response
-from models.assessment_model import Assessments
+from models.assessment import Assessments
 from utils.enums import Collections
 from database import db
 from utils.crud import find_all, create, find_one
@@ -32,7 +32,7 @@ async def create_assessments(response:Response,assessments: Assessments):
         }
 
 @router.get("/")
-async def get_assessments(response:Response,):
+async def get_assessments(response:Response):
     """
     Retrieve all assessments from the MongoDB collection.
 
@@ -62,8 +62,8 @@ async def get_assessment(response:Response,id: str):
         dict: The retrieved assessment with ObjectId converted to string.
     """
     try:
-        assessments_list = find_one(collection=collection, id=id)
-        return assessments_list
+        assessment = find_one(collection=collection, id=id)
+        return assessment
 
     except Exception as e:
         print(f"Error: {e}")
