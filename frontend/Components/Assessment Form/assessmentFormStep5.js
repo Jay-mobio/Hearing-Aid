@@ -5,14 +5,14 @@ import { useState } from 'react';
 
 const { Text } = Typography;
 
-export const Step5 = ({ gotoStep, current }) => {
-    const [isOtherSelected, setOtherSelected] = useState(false);
+export const Step5 = ({ gotoStep, current, form }) => {
+    // const [isOtherSelected, setOtherSelected] = useState(false);
     const [otherValue, setOtherValue] = useState('');
 
-    const handleRadioChange = (e) => {
-        const value = e.target.value;
-        setOtherSelected(value === 'other');
-    };
+    // const handleRadioChange = (e) => {
+    //     const value = e.target.value;
+    //     setOtherSelected(value === 'other');
+    // };
     return (
         <>
             <Form.Item>
@@ -26,7 +26,7 @@ export const Step5 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Mother's Health Details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -39,7 +39,7 @@ export const Step5 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -52,7 +52,7 @@ export const Step5 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -70,26 +70,35 @@ export const Step5 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input Delivery",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <Radio.Group onChange={handleRadioChange} value={isOtherSelected ? otherValue : undefined}>
+                <Radio.Group 
+                // onChange={handleRadioChange} value={isOtherSelected ? otherValue : undefined}
+                >
                     <Space direction="vertical">
                         <Radio value="fullTerm">Full term/पूरा कार्यकाल</Radio>
                         <Radio value="preTerm">Pre-term/Premature/प्री-टर्म / प्रीमेच्योर</Radio>
-                        <Radio value="other">
+                        <Radio value={otherValue}>
                             Other:
-                            {isOtherSelected && (
-                                <Input
-                                    style={{
-                                        width: 100,
-                                        marginLeft: 10,
-                                    }}
-                                    value={otherValue}
-                                    onChange={(e) => setOtherValue(e.target.value)}
-                                />
-                            )}
+                            {/* {isOtherSelected && ( */}
+                            <Input
+                                style={{
+                                    width: 200,
+                                    marginLeft: 10,
+                                }}
+                                placeholder='Your answer'
+                                value={otherValue}
+                                onChange={(e) => {
+                                    setOtherValue(e.target.value)
+                                    form.setFieldsValue({
+                                        "delivery": e.target.value,
+                                    });
+                                }
+                                }
+                            />
+                            {/* )} */}
                         </Radio>
                     </Space>
                 </Radio.Group>
@@ -101,7 +110,7 @@ export const Step5 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input Duration of Labour",
+                        message: "This is a required question",
                     },
                 ]}
             >

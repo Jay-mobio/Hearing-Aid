@@ -29,6 +29,7 @@
 }
 
 .checkbox {
+    width: 100%;
     margin-bottom: 0.75rem;
 }
 
@@ -64,4 +65,8 @@
 
 :where(.css-dev-only-do-not-override-2i2tap).ant-steps .ant-steps-item:not(.ant-steps-item-active)>.ant-steps-item-container[role='button'] {
     cursor: default;
+}
+
+.date-field {
+    width: 40%;
 }

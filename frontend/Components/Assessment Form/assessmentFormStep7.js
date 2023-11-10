@@ -18,11 +18,11 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <TextArea rows={4} placeholder="Your answer" maxLength={6} />
+                <TextArea rows={4} placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -31,7 +31,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -44,7 +44,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -57,7 +57,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -70,7 +70,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -83,7 +83,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -96,7 +96,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -109,7 +109,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -122,11 +122,11 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <TextArea rows={4} placeholder="Your answer" maxLength={6} />
+                <TextArea rows={4} placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -135,7 +135,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -148,7 +148,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -166,7 +166,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please select child's physical development details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -185,7 +185,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please select child's coordination",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -204,11 +204,11 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
-                <TextArea rows={4} placeholder="Your answer" maxLength={6} />
+                <TextArea rows={4} placeholder="Your answer" />
             </Form.Item>
 
             <Form.Item
@@ -217,7 +217,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please select your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -235,7 +235,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please select your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -253,7 +253,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please select your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -271,7 +271,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: true,
-                        message: "Please select your details",
+                        message: "This is a required question",
                     },
                 ]}
             >
@@ -289,7 +289,7 @@ export const Step7 = ({ gotoStep, current }) => {
                 rules={[
                     {
                         required: false,
-                        message: "Please input your details",
+                        message: "This is a required question",
                     },
                 ]}
             >

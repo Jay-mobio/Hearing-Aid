@@ -1,6 +1,6 @@
 import { Form, DatePicker, Button, Input } from 'antd';
-import { onFillingDateChange } from './assessmentFormUtils';
 import './assessmentForm.css';
+import { isEmailValid } from '@/lib/utils';
 
 export const Step1 = ({ gotoStep, current }) => (
     <>
@@ -24,11 +24,19 @@ export const Step1 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: true,
-                    message: 'Please input Email',
+                    message: 'This is a required question',
                 },
+                ({ getFieldValue }) => ({
+                    validator(_, value) {
+                        if (!value || isEmailValid(value)) {
+                            return Promise.resolve();
+                        }
+                        return Promise.reject('Invalid email format');
+                    },
+                }),
             ]}
         >
-            <Input placeholder="Email" />
+            <Input placeholder="Your answer" />
         </Form.Item>
 
         <Form.Item
@@ -37,13 +45,11 @@ export const Step1 = ({ gotoStep, current }) => (
             rules={[
                 {
                     required: true,
-                    message: 'Please input Date',
+                    message: 'This is a required question',
                 },
             ]}
         >
-            <DatePicker placeholder='Date'
-            // onChange={onFillingDateChange} 
-            />
+            <DatePicker className='date-field' placeholder='Select date' />
         </Form.Item>
 
         <Form.Item className='next-btn'>
