@@ -1,7 +1,9 @@
+// color code : #01A3D7
+
 export default function Home() {
   return (
     <div>
-      Hello Hearing
+      Hello World
     </div>
   )
 }

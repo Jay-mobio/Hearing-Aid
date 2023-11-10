@@ -4,15 +4,16 @@ import React, { useState, useEffect } from 'react';
 import { Layout } from 'antd';
 import Sidebar from './Sidebar';
 import Header from './Header';
-// import { Audio } from 'react-loader-spinner'
+import { Audio } from 'react-loader-spinner'
 
 const { Content } = Layout;
 
 const DashboardLayout = ({ children }) => {
+
   const [collapsed, setCollapsed] = useState(false);
   const [cssLoaded, setCssLoaded] = useState(false);
+
   useEffect(() => {
-    // Simulate loading of CSS (replace with actual CSS loading logic)
     setTimeout(() => {
       setCssLoaded(true);
     }, 1000); // Adjust the delay as needed
@@ -32,15 +33,8 @@ const DashboardLayout = ({ children }) => {
           </Layout>
         </Layout>
       ) : (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100vh'
-          }}
-        >
-          {/* <Audio
+        <div className='css-loader'>
+          <Audio
             height="60"
             width="80"
             radius="10"
@@ -48,7 +42,7 @@ const DashboardLayout = ({ children }) => {
             ariaLabel="loading"
             wrapperStyle
             wrapperClass
-          /> */}
+          />
         </div>
       )}
     </>
